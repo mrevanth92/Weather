@@ -8,18 +8,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Wind {
 	
 	private final String id;
-	private final Integer speed;
+	private final Double speed;
 	private final Integer degree;
 	
 	@JsonCreator
-	public Wind(@JsonProperty("speed") Integer speed,@JsonProperty("degree") Integer degree) {
+	public Wind(@JsonProperty("speed") Double speed,@JsonProperty("degree") Integer degree) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.speed = speed;
 		this.degree = degree;
 	}
 	
-	public Integer getSpeed(){
+	public Double getSpeed(){
 		return this.speed;
 	}
 	
