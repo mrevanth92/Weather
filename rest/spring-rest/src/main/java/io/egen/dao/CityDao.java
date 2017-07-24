@@ -1,12 +1,12 @@
-package io.egen.service;
+package io.egen.dao;
 
 import java.util.List;
 
 import io.egen.beans.City;
 import io.egen.beans.Weather;
 
-public interface CityService {
-
+public interface CityDao {
+	
 	List<City> getAll();
 
 	City getByCity(String city);
@@ -20,4 +20,5 @@ public interface CityService {
 	void gethourly(String city);
 
 	void getDaily(String city);
+
 }

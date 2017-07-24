@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import io.egen.beans.City;
 import io.egen.beans.Weather;
 import io.egen.service.CityService;
+import io.egen.service.impl.CityServiceImpl;
 
 @RestController
 @RequestMapping(value = "/city")
 public class CityContoller {
 	
-	@Autowired
-	CityService service;
+	
+	private final CityService service;
+	
+	public CityContoller(CityService service) {
+		this.service = service;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<City> getAll(){

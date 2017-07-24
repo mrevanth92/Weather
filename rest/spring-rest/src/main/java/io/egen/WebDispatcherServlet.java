@@ -6,7 +6,7 @@ public class WebDispatcherServlet extends AbstractAnnotationConfigDispatcherServ
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[]{WebConfig.class ,HibernateConfig.class};
+		return new Class[]{WebConfig.class ,JPAConfig.class};
 	}
 
 	@Override
@@ -17,7 +17,6 @@ public class WebDispatcherServlet extends AbstractAnnotationConfigDispatcherServ
 
 	@Override
 	protected String[] getServletMappings() {
-		// TODO Auto-generated method stub
 		return new String[] {"/api/*"};
 	}
 

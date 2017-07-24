@@ -1,6 +1,7 @@
 package io.egen.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,15 +12,19 @@ import io.egen.service.WeatherService;
 
 @RestController
 @RequestMapping(value = "/weather")
+@CrossOrigin(origins = "http://mocker.egen.io")
 public class WeatherController {
 	
-	@Autowired
-	WeatherService service;
+
+	private final WeatherService service;
+	
+	public WeatherController(WeatherService service) {
+		this.service = service;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Weather insert(@RequestBody Weather weather){
-		return service.insert(weather);
+	public void insert(@RequestBody Weather weather){
+		service.insert(weather);
 	}
-	
 	
 }

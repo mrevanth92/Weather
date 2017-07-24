@@ -2,13 +2,23 @@ package io.egen.beans;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Entity
+@Table(name = "wind")
 public class Wind {
-	
+	@Id
+	@Column(name = "id")
 	private final String id;
+	@Column(name = "speed")
 	private final Double speed;
+	@Column(name = "degree")
 	private final Integer degree;
 	
 	@JsonCreator
