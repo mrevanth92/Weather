@@ -1,6 +1,8 @@
 package io.egen.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.egen.Exception.BadRequest;
 import io.egen.Exception.NotFoundException;
 import io.egen.beans.Average;
 import io.egen.beans.City;
@@ -30,6 +33,10 @@ public class WeatherServiceImpl implements WeatherService {
 	}
 
 	public void insert(Weather weather) {
+		Timestamp timestamp = new Timestamp(new Date().getTime());
+		if(weather.getTimestamp().after(timestamp)){
+			throw new BadRequest("Weather information is not reported correctly");
+		}
 		City city = cityService.getByCity(weather.getCity().getCity());
 		if (city == null) {
 			city = cityService.insert(weather.getCity());

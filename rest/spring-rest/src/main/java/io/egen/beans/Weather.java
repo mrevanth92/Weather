@@ -105,9 +105,9 @@ public class Weather {
 		return wind;
 	}
 
-	public String getTimestamp() {
+	public Timestamp getTimestamp() {
 		if(timestamp != null){
-			return timestamp.toString();
+			return timestamp;
 		}
 		return null;
 	}
