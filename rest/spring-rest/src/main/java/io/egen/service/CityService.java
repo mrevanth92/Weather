@@ -12,12 +12,4 @@ public interface CityService {
 	City getByCity(String city);
 	
 	City insert(City city);
-
-	Weather getWeather(String city);
-
-	Weather getproperty(String property, String city);
-
-	void gethourly(String city);
-
-	void getDaily(String city);
 }

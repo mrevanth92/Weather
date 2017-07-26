@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -15,14 +16,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Wind {
 	@Id
 	@Column(name = "id")
-	private final String id;
+	@JsonIgnore
+	private String id;
 	@Column(name = "speed")
-	private final Double speed;
+	private Double speed;
 	@Column(name = "degree")
-	private final Integer degree;
+	private Double degree;
+	
+	public Wind(){
+		
+	}
 	
 	@JsonCreator
-	public Wind(@JsonProperty("speed") Double speed,@JsonProperty("degree") Integer degree) {
+	public Wind(@JsonProperty("speed") Double speed,@JsonProperty("degree") Double degree) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.speed = speed;
@@ -33,7 +39,7 @@ public class Wind {
 		return this.speed;
 	}
 	
-	public Integer getDegree(){
+	public Double getDegree(){
 		return this.degree;
 	}
 	

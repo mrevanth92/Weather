@@ -18,17 +18,17 @@ import io.egen.dao.CityDao;
 
 @Repository
 @Transactional
-public class CityDaoImpl implements CityDao{
+public class CityDaoImpl implements CityDao {
 
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	@Override
-	public City getByCity(String city){
-		Query query = entityManager.createNamedQuery("City.findByCity",City.class);
+	public City getByCity(String city) {
+		Query query = entityManager.createNamedQuery("City.findByCity", City.class);
 		query.setParameter(1, city);
 		List<City> list = query.getResultList();
-		if(list != null && list.size() !=0){
+		if (list != null && list.size() != 0) {
 			return list.get(0);
 		}
 		return null;
@@ -36,33 +36,12 @@ public class CityDaoImpl implements CityDao{
 
 	@Override
 	public List<City> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = entityManager.createNamedQuery("City.findAll", City.class);
+		List<City> list = query.getResultList();
+		return list;
 	}
 
-	@Override
-	public Weather getWeather(String city) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Weather getproperty(String property, String city) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void gethourly(String city) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getDaily(String city) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public City insert(City city) {

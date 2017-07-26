@@ -10,34 +10,18 @@ import io.egen.dao.CityDao;
 import io.egen.service.CityService;
 
 @Service
-public class CityServiceImpl implements CityService{
-	
+public class CityServiceImpl implements CityService {
+
 	private final CityDao dao;
-	
-	public CityServiceImpl(CityDao dao){
+
+	public CityServiceImpl(CityDao dao) {
 		this.dao = dao;
 	}
-	
-	public List<City> getAll(){
-		return null;
+
+	public List<City> getAll() {
+		return dao.getAll();
 	}
 
-	public Weather getWeather(String city){
-		return null;
-	}
-
-	public Weather getproperty(String property ,String city){
-		return null;
-	}
-
-	public void gethourly(String city){
-		
-	}
-
-	public void getDaily(String city){
-		
-	}
-	
 	public City getByCity(String city) {
 		return dao.getByCity(city);
 	}
@@ -45,6 +29,6 @@ public class CityServiceImpl implements CityService{
 	@Override
 	public City insert(City city) {
 		return dao.insert(city);
-		
+
 	}
 }
