@@ -1,18 +1,14 @@
 package io.egen.service.impl;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.egen.Exception.NotFoundException;
 import io.egen.beans.Average;
 import io.egen.beans.City;
 import io.egen.beans.Property;
@@ -47,7 +43,7 @@ public class WeatherServiceImpl implements WeatherService {
 		if(weather != null){
 			return weather;
 		}
-		return null;
+		throw new NotFoundException("Weather report for city not available");
 	}
 
 	public Property getproperty(String property, String city) {
@@ -57,13 +53,16 @@ public class WeatherServiceImpl implements WeatherService {
 			Map<String,Object> map = mapper.convertValue(weather, Map.class);
 			return new Property(property, map.get(property));
 		}		
-		return null;
+		throw new NotFoundException("Weather report for city not available");
 	}
 
 	@Override
 	public List<Average> gethourly(String city) {
 		List<Object[]> list = dao.gethourly(city);
 		List<Average> avgList = new ArrayList<>(list.size());
+		if(list == null || list.size() == 0){
+			throw new NotFoundException("Hourly weather report for city not available");
+		}
 		for (Object[] avgValue : list) {
 			avgList.add(new Average((String) avgValue[0], (String)avgValue[6],
 					new Weather(city, null, (Double) avgValue[1], (Double) avgValue[2], (Double) avgValue[3],
@@ -75,6 +74,9 @@ public class WeatherServiceImpl implements WeatherService {
 	@Override
 	public List<Average> getDaily(String city) {
 		List<Object[]> list = dao.getDaily(city);
+		if(list == null || list.size() == 0){
+			throw new NotFoundException("Daily weather report for city not available");
+		}
 		List<Average> avgList = new ArrayList<>(list.size());
 		for (Object[] avgValue : list) {
 			avgList.add(new Average((String) avgValue[0], null,

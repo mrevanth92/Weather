@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import io.egen.Exception.NotFoundException;
 import io.egen.beans.City;
 import io.egen.beans.Weather;
 import io.egen.dao.CityDao;
@@ -19,7 +20,11 @@ public class CityServiceImpl implements CityService {
 	}
 
 	public List<City> getAll() {
-		return dao.getAll();
+		List<City> list = dao.getAll();
+		if(list == null || list.size() == 0){
+			throw new NotFoundException("No weather information available.Please try again later");
+		}
+		return list;
 	}
 
 	public City getByCity(String city) {
